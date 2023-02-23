@@ -1,0 +1,21 @@
+name: Assignment Testing
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      -uses: actions/checkout@v3
+      
+      -name: Installing pylint
+        run: pip install pylint
+       
+       -name: Installing black
+        run: pip install black
+        
+        -name: Using pylint on main.py
+          run: pylint main.py
+       
+        -name: Using black on main.py
+          run: black main.py
