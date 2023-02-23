@@ -15,7 +15,7 @@ jobs:
         run: pip install black
         
       - name: Using pylint on main.py
-        run: pylint main.py
+        run: pylint knowledge_gpt/main.py
        
       - name: Using black on main.py
-        run: black main.py
+        run: black knowledge_gpt/main.py
