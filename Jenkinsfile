@@ -1,12 +1,32 @@
 pipeline {
-    agent {
-        docker { image 'python:3' }
+    agent any
+
+    environment {
+        PATH = "${PATH}:${HOME}/.local/bin"
     }
+
     stages {
-        stage('Test') {
+        stage('Cloning the repo') {
             steps {
-                bat 'pip --version'
+                git branch: 'Jenkinsworkflow', url: 'https://github.com/Zahid07/knowledge_gpt.git'
+                sh 'pip install poetry'
+
             }
         }
+
+        stage('Lint with flake8') {
+            steps {
+                sh 'pip install flake8'
+                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+            }
+        }
+
+        stage('Format with black') {
+            steps {
+                sh 'pip install black'
+                sh 'black .'
+            }
+        }
+
     }
 }
