@@ -6,14 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Cloning the repo') {
-            steps {
-                git branch: 'Jenkinsworkflow', url: 'https://github.com/NisarMehmood/knowledge_gpt.git'
-                bat 'pip install poetry'
-
-            }
-        }
-
+       
         stage('Lint with flake8') {
             steps {
                 bat 'pip install flake8'
