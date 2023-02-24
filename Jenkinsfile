@@ -1,25 +1,12 @@
 pipeline {
-    agent any
-
-    environment {
-        PATH = "${PATH}:${HOME}/.local/bin"
+    agent {
+        docker { image 'python:3' }
     }
-
     stages {
-       
-        stage('Lint with flake8') {
+        stage('Test') {
             steps {
-                bat 'pip install flake8'
-                bat 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                sh 'pip --version'
             }
         }
-
-        stage('Format with black') {
-            steps {
-                bat 'pip install black'
-                bat 'black .'
-            }
-        }
-
     }
 }
